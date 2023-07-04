@@ -1,0 +1,15 @@
+# dbt_profile.yml
+
+transform:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: mypg
+      user: postgres2
+      port: 5432
+      password: postgres2
+      dbname: exchange
+      schema: public
+      threads: 1
+      keepalives_idle: 0

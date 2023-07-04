@@ -1,0 +1,40 @@
+version: '3'
+services:
+
+  el:
+    build: el/
+    volumes:
+    - ./el:/el_code
+    env_file:
+      - ./.env
+    depends_on:
+    - mypg
+    - transform
+
+  mypg:
+    image: postgres
+    ports:
+    - 5432:5432
+    restart: always
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=postgres2
+      - POSTGRES_PASSWORD=postgres2
+      - POSTGRES_HOST=mypg
+      - POSTGRES_DB=$exchange
+
+  transform:
+    build:
+      context: transform
+    volumes:
+      - ./transform:/transform
+    depends_on:
+      - mypg
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=postgres2
+      - POSTGRES_PASSWORD=postgres2
+      - POSTGRES_HOST=mypg
+      - POSTGRES_DB=$exchange
