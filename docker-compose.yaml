@@ -14,7 +14,7 @@ services:
   mypg:
     image: postgres
     ports:
-    - 5432:5432
+    - 5433:5432
     restart: always
     env_file:
       - ./.env
@@ -22,7 +22,7 @@ services:
       - POSTGRES_USER=postgres2
       - POSTGRES_PASSWORD=postgres2
       - POSTGRES_HOST=mypg
-      - POSTGRES_DB=$exchange
+      - POSTGRES_DB=exchange
 
   transform:
     build:
@@ -37,4 +37,24 @@ services:
       - POSTGRES_USER=postgres2
       - POSTGRES_PASSWORD=postgres2
       - POSTGRES_HOST=mypg
-      - POSTGRES_DB=$exchange
+      - POSTGRES_DB=exchange
+
+  metabase:
+    image: metabase/metabase
+    ports:
+      - 3000:3000
+    volumes:
+      - ./metabase-data:/metabase-data
+    depends_on:
+      - mypg
+    env_file:
+      - ./.env
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_PORT=5432
+      - MB_DB_DBNAME=exchange
+      - MB_DB_USER=postgres2
+      - MB_DB_PASS=postgres2
+      - MB_DB_HOST=mypg
+
+
