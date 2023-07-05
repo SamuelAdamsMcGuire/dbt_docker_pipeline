@@ -31,6 +31,7 @@ services:
       - ./transform:/transform
     depends_on:
       - mypg
+    restart: on-failure
     env_file:
       - ./.env
     environment:
