@@ -16,6 +16,7 @@
 
 ## To Dos
 
+- refactor into a kubernetes cluster
 - fix `.env` so it will also hold the postgres and other secret data (had problems with DBT resolving the postgres credentials)
 - add tests in DBT
 - add macros in DBT
