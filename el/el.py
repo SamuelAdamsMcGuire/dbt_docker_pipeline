@@ -39,7 +39,7 @@ exchange_dict = {'extracted_at':[],
                     'extracted_data':[]}
 
 
-for day in pd.date_range(start='06/03/2023', end='07/03/2023', ):
+for day in pd.date_range(start='07/03/2023', end='07/04/2023', ):
     api_url = f"http://api.exchangeratesapi.io/v1/{str(day)[:-9]}?access_key={api_key}"
     response = requests.request("GET", api_url)
     logging.warning(f'attempt resulted in {response.status_code}')
