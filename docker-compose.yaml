@@ -44,18 +44,7 @@ services:
     image: metabase/metabase
     ports:
       - 3000:3000
-    volumes:
-      - ./metabase-data:/metabase-data
     depends_on:
       - mypg
-    env_file:
-      - ./.env
-    environment:
-      - MB_DB_TYPE=postgres
-      - MB_DB_PORT=5432
-      - MB_DB_DBNAME=exchange
-      - MB_DB_USER=postgres2
-      - MB_DB_PASS=postgres2
-      - MB_DB_HOST=mypg
 
 
